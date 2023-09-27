@@ -1,7 +1,8 @@
 package com.projet.projetojava.service;
 
 import com.projet.projetojava.entity.Passenger;
-import com.projet.projetojava.Repository.PassengerRepository;
+import com.projet.projetojava.repository.Passengerrepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,31 +11,31 @@ import java.util.List;
 @Service
 public class PassengerService {
 
-    private final PassengerRepository passengerRepository;
+    private final Passengerrepository passengerrepository;
 
     @Autowired
-    public PassengerService(PassengerRepository passengerRepository) {
-        this.passengerRepository = passengerRepository;
+    public PassengerService(Passengerrepository passengerrepository) {
+        this.passengerrepository = passengerrepository;
     }
 
     public List<Passenger> getPassengers() {
-        return passengerRepository.findAll();
+        return passengerrepository.findAll();
     }
 
     public Passenger getPassenger(Long id) {
-        return passengerRepository.findById(id)
+        return passengerrepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Passenger with id " + id + " does not exist"));
     }
 
     public void addNewPassenger(Passenger passenger) {
-        passengerRepository.save(passenger);
+        passengerrepository.save(passenger);
     }
 
     public void deletePassenger(Long id) {
-        boolean exists = passengerRepository.existsById(id);
+        boolean exists = passengerrepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("Passenger with id " + id + " does not exist");
         }
-        passengerRepository.deleteById(id);
+        passengerrepository.deleteById(id);
     }
 }

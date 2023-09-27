@@ -1,10 +1,10 @@
-package com.projet.projetojava.Repository;
+package com.projet.projetojava.repository;
 
 import com.projet.projetojava.entity.Airline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AirlineRepository extends JpaRepository<Airline, Long> {
+public interface Airlinerepository extends JpaRepository<Airline, Long> {
    
 }
