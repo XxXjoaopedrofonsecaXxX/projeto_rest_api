@@ -1,10 +1,10 @@
-package com.projet.projetojava.repository;
+package com.projet.projetojava.rRepository;
 
 import com.projet.projetojava.entity.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface Ticketrepository extends JpaRepository<Ticket, Long> {
+public interface TicketRpository extends JpaRepository<Ticket, Long> {
     
 }

@@ -1,4 +1,4 @@
-package com.projet.projetojava.repository;
+package com.projet.projetojava.rRepository;
 
 import com.projet.projetojava.entity.Passenger;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface Passengerrepository extends JpaRepository<Passenger, Long> {
+public interface PassengerRepository extends JpaRepository<Passenger, Long> {
    
     List<Passenger> findByName(String name);
 

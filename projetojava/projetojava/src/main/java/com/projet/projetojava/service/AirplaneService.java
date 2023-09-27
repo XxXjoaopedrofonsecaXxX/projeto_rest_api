@@ -4,41 +4,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projet.projetojava.entity.Airplane;
-import com.projet.projetojava.repository.Airplanerepository;
+import com.projet.projetojava.rRepository.AirplaneRepository;
 
 import java.util.List;
 
 @Service
 public class AirplaneService {
-    private final Airplanerepository airplanerepository; 
+    private final AirplaneRepository airplaneRepository; 
 
     @Autowired
-    public AirplaneService(Airplanerepository airplanerepository) {
-        this.airplanerepository = airplanerepository;
+    public AirplaneService(AirplaneRepository airplaneRepository) {
+        this.airplaneRepository = airplaneRepository;
     }
 
    
     public List<Airplane> getAirplanes() {
-        return airplanerepository.findAll();
+        return airplaneRepository.findAll();
     }
 
    
     public Airplane getAirplane(Long id) {
-        return airplanerepository.findById(id)
+        return airplaneRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Airplane with id " + id + " does not exist"));
     }
 
     
     public void addNewAirplane(Airplane airplane) {
-        airplanerepository.save(airplane);
+        airplaneRepository.save(airplane);
     }
 
 
     public void deleteAirplane(Long id) {
-        boolean exists = airplanerepository.existsById(id);
+        boolean exists = airplaneRepository.existsById(id);
         if (!exists) {
             throw new IllegalStateException("Airplane with id " + id + " does not exist");
         }
-        airplanerepository.deleteById(id);
+        airplaneRepository.deleteById(id);
     }
 }

@@ -6,24 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projet.projetojava.entity.Ticket;
-import com.projet.projetojava.repository.Ticketrepository;
+import com.projet.projetojava.rRepository.TicketRpository;
 
 @Service
 public class TicketService {
 
     @Autowired
-    private Ticketrepository ticketrepository;
+    private TicketRpository ticketRpository;
 
     public List<Ticket> getAllTickets() {
-        return ticketrepository.findAll();
+        return ticketRpository.findAll();
     }
 
     public Ticket getTicket(Long id) {
-        return ticketrepository.findById(id).orElse(null);
+        return ticketRpository.findById(id).orElse(null);
     }
 
     public Ticket createTicket(Ticket ticket) {
-        return ticketrepository.save(ticket);
+        return ticketRpository.save(ticket);
     }
 
     public Ticket updateTicket(Long id, Ticket ticketDetails) {
@@ -33,7 +33,7 @@ public class TicketService {
             ticket.setPassportNumber(ticketDetails.getPassportNumber());
             ticket.setCpf(ticketDetails.getCpf());
             ticket.setRg(ticketDetails.getRg());
-            return ticketrepository.save(ticket);
+            return ticketRpository.save(ticket);
         }
         return null;
     }
@@ -41,7 +41,7 @@ public class TicketService {
     public void deleteTicket(Long id) {
         Ticket ticket = getTicket(id);
         if(ticket != null) {
-            ticketrepository.delete(ticket);
+            ticketRpository.delete(ticket);
         }
     }
 }
