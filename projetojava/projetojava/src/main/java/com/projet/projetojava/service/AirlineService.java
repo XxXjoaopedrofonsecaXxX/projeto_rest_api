@@ -16,8 +16,7 @@ public class AirlineService {
     private Map<Long, Airplane> airplanes;
     private AirplaneRepository airplaneRepository; 
 
-    public AirlineService(String airlineName) {
-        this.airlineName = airlineName;
+    public AirlineService() {
         this.airplanes = new HashMap<>();
     }
 

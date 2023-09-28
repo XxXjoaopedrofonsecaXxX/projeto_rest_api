@@ -1,18 +1,25 @@
 package com.projet.projetojava;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
 import com.projet.projetojava.service.AirlineService;
 import com.projet.projetojava.entity.Airplane;
 
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
 
-        AirlineService airlineServiceRed = new AirlineService("Red");
-        AirlineService airlineServiceBlue = new AirlineService("Blue");
-        AirlineService airlineServiceGreen = new AirlineService("Green");
+        AirlineService airlineServiceRed = context.getBean(AirlineService.class);
+        airlineServiceRed.setAirlineName("Red");
 
-        System.out.println(airlineServiceRed.getAirlineName());
-        System.out.println(airlineServiceBlue.getAirlineName());
-        System.out.println(airlineServiceGreen.getAirlineName());
+        AirlineService airlineServiceBlue = context.getBean(AirlineService.class);
+        airlineServiceBlue.setAirlineName("Blue");
+
+        AirlineService airlineServiceGreen = context.getBean(AirlineService.class);
+        airlineServiceGreen.setAirlineName("Green");
 
         // Adicionando aviões à companhia aérea Red
         Airplane airplane1 = new Airplane();
