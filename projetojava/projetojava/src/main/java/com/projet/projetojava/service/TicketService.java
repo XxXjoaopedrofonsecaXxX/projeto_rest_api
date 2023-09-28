@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projet.projetojava.entity.Ticket;
-import com.projet.projetojava.rRepository.TicketRpository;
+import com.projet.projetojava.repository.TicketRpository;
 
 @Service
 public class TicketService {

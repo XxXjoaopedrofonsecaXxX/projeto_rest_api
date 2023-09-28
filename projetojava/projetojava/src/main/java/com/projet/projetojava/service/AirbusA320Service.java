@@ -1,7 +1,8 @@
 package com.projet.projetojava.service;
 
 import com.projet.projetojava.entity.AirbusA320;
-import com.projet.projetojava.rRepository.AirbusA320Repository;
+import com.projet.projetojava.repository.AirbusA320Repository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

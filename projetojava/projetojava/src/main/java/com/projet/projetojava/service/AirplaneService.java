@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projet.projetojava.entity.Airplane;
-import com.projet.projetojava.rRepository.AirplaneRepository;
+import com.projet.projetojava.repository.AirplaneRepository;
 
 import java.util.List;
 

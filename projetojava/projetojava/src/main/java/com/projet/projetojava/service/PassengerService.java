@@ -1,7 +1,7 @@
 package com.projet.projetojava.service;
 
 import com.projet.projetojava.entity.Passenger;
-import com.projet.projetojava.rRepository.PassengerRepository;
+import com.projet.projetojava.repository.PassengerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
