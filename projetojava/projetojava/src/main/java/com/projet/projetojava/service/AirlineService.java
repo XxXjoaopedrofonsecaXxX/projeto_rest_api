@@ -1,28 +1,21 @@
 package com.projet.projetojava.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.entity.Airplane;
 import com.projet.projetojava.repository.AirplaneRepository;
-
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AirlineService {
     private String airlineName;
     private Map<Long, Airplane> airplanes;
-    private AirplaneRepository airplaneRepository; 
+    private final AirplaneRepository airplaneRepository; 
 
-    public AirlineService() {
-        this.airplanes = new HashMap<>();
-    }
-
-    @Autowired
-    public void setAirplaneRepository(AirplaneRepository airplaneRepository) {
+    public AirlineService(AirplaneRepository airplaneRepository) {
+        this.airplanes = new ConcurrentHashMap<>();
         this.airplaneRepository = airplaneRepository;
     }
 
