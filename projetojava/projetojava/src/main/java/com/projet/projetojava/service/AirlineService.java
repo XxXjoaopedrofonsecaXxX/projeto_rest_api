@@ -3,6 +3,7 @@ package com.projet.projetojava.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.entity.Airplane;
 import com.projet.projetojava.repository.AirplaneRepository;
 
@@ -54,4 +55,9 @@ public class AirlineService {
         airplaneRepository.deleteById(id);
         this.airplanes.remove(id);
     }
+
+	public Airline getAirlineById(Long airlineId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
