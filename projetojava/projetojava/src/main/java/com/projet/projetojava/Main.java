@@ -15,19 +15,21 @@ public class Main {
         AirlineService airlineServiceRed = context.getBean(AirlineService.class);
         airlineServiceRed.setAirlineName("Red");
 
-        AirlineService airlineServiceBlue = context.getBean(AirlineService.class);
-        airlineServiceBlue.setAirlineName("Blue");
-
         AirlineService airlineServiceGreen = context.getBean(AirlineService.class);
         airlineServiceGreen.setAirlineName("Green");
+
+        AirlineService airlineServiceBlue = context.getBean(AirlineService.class);
+        airlineServiceBlue.setAirlineName("Blue");
 
         // Adicionando aviões à companhia aérea Red
         Airplane airplane1 = new Airplane();
         airplane1.setModel("Boeing 747");
+        airplane1.setAirline(airlineServiceRed.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceRed.addAirplane(airplane1);
 
         Airplane airplane2 = new Airplane();
         airplane2.setModel("Boeing 747");
+        airplane2.setAirline(airlineServiceRed.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceRed.addAirplane(airplane2);
 
         // Imprimindo o nome da companhia aérea e os aviões
@@ -37,10 +39,12 @@ public class Main {
         // Adicionando aviões à companhia aérea Blue
         Airplane airplane3 = new Airplane();
         airplane3.setModel("Airbus A320");
+        airplane3.setAirline(airlineServiceBlue.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceBlue.addAirplane(airplane3);
 
         Airplane airplane4 = new Airplane();
         airplane4.setModel("Airbus A320");
+        airplane4.setAirline(airlineServiceBlue.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceBlue.addAirplane(airplane4);
 
         // Imprimindo o nome da companhia aérea e os aviões
@@ -50,10 +54,12 @@ public class Main {
         // Adicionando aviões à companhia aérea Green
         Airplane airplane5 = new Airplane();
         airplane5.setModel("Boeing 737");
+        airplane5.setAirline(airlineServiceGreen.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceGreen.addAirplane(airplane5);
 
         Airplane airplane6 = new Airplane();
         airplane6.setModel("Boeing 737");
+        airplane6.setAirline(airlineServiceGreen.getAirlineName()); // Defina a companhia aérea para o avião
         airlineServiceGreen.addAirplane(airplane6);
 
         // Imprimindo o nome da companhia aérea e os aviões

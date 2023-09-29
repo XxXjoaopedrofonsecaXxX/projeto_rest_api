@@ -12,7 +12,8 @@ public class Airplane {
     private Long id;
     private String model;
     private int capacity;
-
+    private String airline; 
+    
     public Long getId() {
         return id;
     }
@@ -37,13 +38,21 @@ public class Airplane {
         this.capacity = capacity;
     }
 
+   
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
     @Override
     public String toString() {
-        return "Airplane{" +
-            "id=" + id +
-            ", model='" + model + '\'' +
-            ", capacity=" + capacity +
-            '}';
+        return "Airplane ID: " + id +
+               "\nModel: " + model +
+               "\nCapacity: " + capacity +
+               "\nAirline: " + airline; // Inclua 'airline' na saída
     }
 }
 
