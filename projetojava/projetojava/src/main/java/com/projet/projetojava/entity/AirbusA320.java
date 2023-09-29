@@ -32,6 +32,6 @@ public class AirbusA320 {
 	}
 	private String nome;
     private int capacidadePassageiros;
-
+   
     
 }

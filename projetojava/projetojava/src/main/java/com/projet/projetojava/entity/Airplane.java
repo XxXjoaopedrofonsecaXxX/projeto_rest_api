@@ -13,7 +13,8 @@ public class Airplane {
     private String model;
     private int capacity;
     private String airline; 
-    
+    private int maxCapacity; 
+
     public Long getId() {
         return id;
     }
@@ -38,7 +39,6 @@ public class Airplane {
         this.capacity = capacity;
     }
 
-   
     public String getAirline() {
         return airline;
     }
@@ -46,13 +46,23 @@ public class Airplane {
     public void setAirline(String airline) {
         this.airline = airline;
     }
+    
+    // Getter e setter para maxCapacity
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
 
     @Override
     public String toString() {
         return "Airplane ID: " + id +
                "\nModel: " + model +
                "\nCapacity: " + capacity +
-               "\nAirline: " + airline; // Inclua 'airline' na saída
+               "\nMax Capacity: " + maxCapacity + // Inclua 'maxCapacity' na saída
+               "\nAirline: " + airline; 
     }
 }
 

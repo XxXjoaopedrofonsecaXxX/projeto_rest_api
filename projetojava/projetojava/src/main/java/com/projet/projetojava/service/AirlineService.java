@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.entity.Airplane;
 import com.projet.projetojava.repository.AirplaneRepository;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,6 +40,7 @@ public class AirlineService {
     }
 
     public void addAirplane(Airplane airplane) {
+        System.out.println("Modelo: " + airplane.getModel() + ", Capacidade Máxima: " + airplane.getMaxCapacity());
         airplaneRepository.save(airplane);
         this.airplanes.put(airplane.getId(), airplane);
     }
