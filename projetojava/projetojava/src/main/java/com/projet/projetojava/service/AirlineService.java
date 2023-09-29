@@ -1,5 +1,7 @@
 package com.projet.projetojava.service;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.entity.Airplane;
@@ -9,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class AirlineService {
     private String airlineName;
     private Map<Long, Airplane> airplanes;
@@ -54,3 +57,4 @@ public class AirlineService {
 		return null;
 	}
 }
+
