@@ -36,4 +36,14 @@ public class Airplane {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    @Override
+    public String toString() {
+        return "Airplane{" +
+            "id=" + id +
+            ", model='" + model + '\'' +
+            ", capacity=" + capacity +
+            '}';
+    }
 }
+
