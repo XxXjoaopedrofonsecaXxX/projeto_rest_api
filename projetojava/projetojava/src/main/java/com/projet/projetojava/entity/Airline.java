@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +16,24 @@ public class Airline {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private List<Airplane> airplanes;
+
+    @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Airplane> airplanes = new ArrayList<>();
 
     public Airline() {
-        this.airplanes = new ArrayList<>();
     }
 
-    public Airline(Long id, String name) {
-        this.id = id;
+    public Airline(String name) {
         this.name = name;
-        this.airplanes = new ArrayList<>();
     }
 
     public static Airline createAirLine(String name) {
-        Airline airline = new Airline();
-        airline.setName(name);
-        return airline;
+        return new Airline(name);
     }
 
     public void addAirplane(Airplane airplane) {
         this.airplanes.add(airplane);
+        airplane.setAirline(this);
     }
 
 	public Long getId() {

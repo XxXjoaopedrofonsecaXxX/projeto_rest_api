@@ -64,4 +64,13 @@ public class AirlineService {
         }
         airplaneRepository.deleteById(id);
     }
+    
+    public void addAirplaneToAirline(String model, int capacity, int maxCapacity, Airline airline) {
+        Airplane airplane = new Airplane();
+        airplane.setModel(model);
+        airplane.setCapacity(capacity);
+        airplane.setMaxCapacity(maxCapacity);
+        airplane.setAirline(airline); // 'airline' é um objeto Airline
+        airplaneRepository.save(airplane);
+    }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Airplane {
@@ -11,58 +12,49 @@ public class Airplane {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String model;
-    private int capacity;
-    private String airline; 
+    private int capacity; 
     private int maxCapacity; 
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    private Airline airline;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getModel() {
-        return model;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+	public String getModel() {
+		return model;
+	}
 
-    public int getCapacity() {
-        return capacity;
-    }
+	public void setModel(String model) {
+		this.model = model;
+	}
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+	public int getCapacity() {
+		return capacity;
+	}
 
-    public String getAirline() {
-        return airline;
-    }
-
-    public void setAirline(String airline) {
-        this.airline = airline;
-    }
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
     
-    // Getter e setter para maxCapacity
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
+	public int getMaxCapacity() {
+		return maxCapacity;
+	}
 
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
-    }
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
-    @Override
-    public String toString() {
-        return "Airplane ID: " + id +
-               "\nModel: " + model +
-               "\nCapacity: " + capacity +
-               "\nMax Capacity: " + maxCapacity + // Inclua 'maxCapacity' na saída
-               "\nAirline: " + airline; 
-    }
+	public Airline getAirline() {
+		return airline;
+	}
+
+	public void setAirline(Airline airline) {
+		this.airline = airline;
+	}
 }
-
