@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity 
-public class AirbusA320 {
+public class Boeing747 {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +16,10 @@ public class AirbusA320 {
     private int capacidadePassageiros;
     private final int capacidadeMaxima;
 
-    public AirbusA320(String nome, int capacidadePassageiros) {
+    public Boeing747(String nome, int capacidadePassageiros) {
         this.nome = nome;
         this.capacidadePassageiros = capacidadePassageiros;
-        this.capacidadeMaxima = 180;  // Capacidade máxima para Airbus A320
+        this.capacidadeMaxima = 366;  // Capacidade máxima para Boeing 747
     }
 
     public Long getId() {
