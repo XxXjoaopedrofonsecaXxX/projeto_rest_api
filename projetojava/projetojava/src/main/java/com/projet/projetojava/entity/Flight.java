@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import java.time.Duration;
 
 @Entity
 public class Flight {
@@ -15,16 +16,18 @@ public class Flight {
     private String flightNumber;
     
     @ManyToOne
-    private Airline airline; // Alterado para ser uma referência à entidade Airline
+    private Airline airline; // Referência à entidade Airline
     
     private String origin;
     private String destination;
+    private Duration duration; // Duração do voo
 
-    public Flight(String flightNumber, Airline airline, String origin, String destination) {
+    public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
         this.setFlightNumber(flightNumber);
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
+        this.duration = duration; // Definindo a duração do voo
     }
 
 	public String getFlightNumber() {
@@ -66,6 +69,12 @@ public class Flight {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-
-   
+	
+	public Duration getDuration() {
+	    return duration; // Getter para a duração do voo
+	}
+	
+	public void setDuration(Duration duration) {
+	    this.duration = duration; // Setter para a duração do voo
+	}
 }
