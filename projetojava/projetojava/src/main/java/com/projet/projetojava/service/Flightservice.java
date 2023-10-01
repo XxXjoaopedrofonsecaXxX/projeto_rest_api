@@ -32,4 +32,14 @@ public class Flightservice {
     public void deleteFlight(Long id) {
         flightRepository.deleteById(id);
     }
+
+    public Flight updateFlight(Long id, Flight flightDetails) {
+        Flight flight = getFlightById(id);
+        if (flight != null) {
+            flight.setFlightNumber(flightDetails.getFlightNumber());
+            // Adicione aqui os outros campos que você deseja atualizar
+            return saveFlight(flight);
+        }
+        return null;
+    }
 }
