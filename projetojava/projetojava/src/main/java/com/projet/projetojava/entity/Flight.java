@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import java.time.Duration;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @Entity
 public class Flight {
@@ -76,5 +79,14 @@ public class Flight {
 	
 	public void setDuration(Duration duration) {
 	    this.duration = duration; // Setter para a duração do voo
+	}
+	
+	public static void sortFlightsByDuration(List<Flight> flights) {
+	    Collections.sort(flights, new Comparator<Flight>() {
+	        @Override
+	        public int compare(Flight f1, Flight f2) {
+	            return f1.getDuration().compareTo(f2.getDuration());
+	        }
+	    });
 	}
 }
