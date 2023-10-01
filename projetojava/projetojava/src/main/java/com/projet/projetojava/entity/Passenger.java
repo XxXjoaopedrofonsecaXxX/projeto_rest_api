@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Passenger {
@@ -17,67 +18,49 @@ public class Passenger {
     private String cpf;
     private String rg;
 
-    
+    @ManyToOne
+    private Flight flight; // O voo no qual o passageiro está
 
-   
-    public boolean isCpfValid() {
-        
-        return true;
+    public Passenger() {
     }
 
-   
-    public boolean isRgValid() {
-        
-        return true;
+    public Passenger(String name, String passportNumber, String cpf, String rg, Flight flight) {
+        this.name = name;
+        this.passportNumber = passportNumber;
+        setCpf(cpf); // Use o setter para que a validação seja feita
+        setRg(rg); // Use o setter para que a validação seja feita
+        this.flight = flight; // Definindo o voo do passageiro
     }
 
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public String getPassportNumber() {
-		return passportNumber;
-	}
-
-
-	public void setPassportNumber(String passportNumber) {
-		this.passportNumber = passportNumber;
-	}
-
-
-	public String getCpf() {
-		return cpf;
-	}
-
+	// ... getters e setters ...
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		if (isCpfValid(cpf)) {
+			this.cpf = cpf;
+		} else {
+			throw new IllegalArgumentException("CPF inválido");
+		}
 	}
-
-
-	public String getRg() {
-		return rg;
-	}
-
 
 	public void setRg(String rg) {
-		this.rg = rg;
+		if (isRgValid(rg)) {
+			this.rg = rg;
+		} else {
+			throw new IllegalArgumentException("RG inválido");
+		}
 	}
+
+	public boolean isCpfValid(String cpf) {
+	    // Implementação da validação do CPF
+	    // Aqui você pode adicionar a lógica para validar o CPF
+	    return true;
+	}
+	
+	public boolean isRgValid(String rg) {
+	    // Implementação da validação do RG
+	    // Aqui você pode adicionar a lógica para validar o RG
+	    return true;
+	}
+	
+	// ... equals, hashCode ...
 }
