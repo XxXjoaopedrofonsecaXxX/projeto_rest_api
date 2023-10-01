@@ -1,5 +1,7 @@
 package com.projet.projetojava.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -51,15 +53,60 @@ public class Passenger {
 	}
 
 	public boolean isCpfValid(String cpf) {
-	    // Implementação da validação do CPF
-	    // Aqui você pode adicionar a lógica para validar o CPF
-	    return true;
+	    if (cpf == null || cpf.length() != 11 || !cpf.chars().allMatch(Character::isDigit)) {
+	        return false;
+	    }
+
+	    int[] numbers = cpf.chars().map(Character::getNumericValue).toArray();
+
+	    int sum = 0;
+	    for (int i = 0; i < 9; i++) {
+	        sum += numbers[i] * (10 - i);
+	    }
+	    int firstCheckDigit = 11 - (sum % 11);
+	    if (firstCheckDigit >= 10) firstCheckDigit = 0;
+
+	    sum = 0;
+	    for (int i = 0; i < 10; i++) {
+	        sum += numbers[i] * (11 - i);
+	    }
+	    int secondCheckDigit = 11 - (sum % 11);
+	    if (secondCheckDigit >= 10) secondCheckDigit = 0;
+
+	    return firstCheckDigit == numbers[9] && secondCheckDigit == numbers[10];
 	}
 	
 	public boolean isRgValid(String rg) {
-	    // Implementação da validação do RG
-	    // Aqui você pode adicionar a lógica para validar o RG
+	    if (rg == null || rg.length() < 5 || rg.length() > 14) {
+	        return false;
+	    }
+
+	    for (char c : rg.toCharArray()) {
+	        if (!Character.isLetterOrDigit(c)) {
+	            return false;
+	        }
+	    }
+
 	    return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cpf, flight, id, name, passportNumber, rg);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Passenger other = (Passenger) obj;
+		return Objects.equals(cpf, other.cpf) && Objects.equals(flight, other.flight) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(passportNumber, other.passportNumber)
+				&& Objects.equals(rg, other.rg);
 	}
 	
 	// ... equals, hashCode ...
