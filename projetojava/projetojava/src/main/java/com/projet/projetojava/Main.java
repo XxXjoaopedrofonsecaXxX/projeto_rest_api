@@ -2,7 +2,6 @@ package com.projet.projetojava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.entity.Airplane;
 
@@ -11,71 +10,46 @@ public class Main {
     
 	public static void main(String[] args) {
 
-		ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+		SpringApplication.run(Main.class, args);
 
 		Airline redLine = 	Airline.createAirLine("Red");
-
-		Airline greenLine = context.getBean(Airline.class);
-		greenLine.setId(1L);
-
-		Airline blueLine = context.getBean(Airline.class);
+		Airline greenLine = new Airline();
+		Airline blueLine = new Airline();
 		blueLine.setName("Blue");
 
 		// Adicionando aviões à companhia aérea Red
-		Airplane airplane1 = new Airplane();
-		airplane1.setModel("Boeing 747");
-		airplane1.setMaxCapacity(366); // Adicionando capacidade máxima
-		airplane1.setAirline(redLine); // Defina a companhia aérea para o avião
-		redLine.addAirplane(airplane1);
-
-		Airplane airplane2 = new Airplane();
-		airplane2.setModel("Boeing 747");
-		airplane2.setMaxCapacity(366); // Adicionando capacidade máxima
-		airplane2.setAirline(redLine); // Defina a companhia aérea para o avião
-		redLine.addAirplane(airplane2);
+		addAirplanesToAirline(redLine, "Boeing 747", 366, 2);
 
         // Imprimindo o nome da companhia aérea e os aviões
-        System.out.println(redLine.getName());
-        for (Airplane airplane : redLine.getAirplanes()) {
-            System.out.println("Modelo: " + airplane.getModel() + ", Capacidade Máxima: " + airplane.getMaxCapacity());
-        }
+        printAirlineAndAirplanes(redLine);
 
         // Adicionando aviões à companhia aérea Blue
-        Airplane airplane3 = new Airplane();
-        airplane3.setModel("Airbus A320");
-        airplane3.setMaxCapacity(180); // Adicionando capacidade máxima
-        airplane3.setAirline(blueLine); // Defina a companhia aérea para o avião
-        blueLine.addAirplane(airplane3);
-
-        Airplane airplane4 = new Airplane();
-        airplane4.setModel("Airbus A320");
-        airplane4.setMaxCapacity(180); // Adicionando capacidade máxima
-        airplane4.setAirline(blueLine); // Defina a companhia aérea para o avião
-        blueLine.addAirplane(airplane4);
+        addAirplanesToAirline(blueLine, "Airbus A320", 180, 2);
 
          // Imprimindo o nome da companhia aérea e os aviões
-        System.out.println(blueLine.getName());
-        for (Airplane airplane : blueLine.getAirplanes()) {
-            System.out.println("Modelo: " + airplane.getModel() + ", Capacidade Máxima: " + airplane.getMaxCapacity());
-        }
+        printAirlineAndAirplanes(blueLine);
 
         // Adicionando aviões à companhia aérea Green
-        Airplane airplane5 = new Airplane();
-        airplane5.setModel("Boeing 737");
-        airplane5.setMaxCapacity(85); // Adicionando capacidade máxima
-        airplane5.setAirline(greenLine); // Defina a companhia aérea para o avião
-        greenLine.addAirplane(airplane5);
-
-        Airplane airplane6 = new Airplane();
-        airplane6.setModel("Boeing 737");
-        airplane6.setMaxCapacity(85); // Adicionando capacidade máxima
-        airplane6.setAirline(greenLine); // Defina a companhia aérea para o avião
-        greenLine.addAirplane(airplane6);
+        addAirplanesToAirline(greenLine, "Boeing 737", 85, 2);
 
         // Imprimindo o nome da companhia aérea e os aviões
-        System.out.println(greenLine.getName());
-        for (Airplane airplane : greenLine.getAirplanes()) {
-            System.out.println("Modelo: " + airplane.getModel() + ", Capacidade Máxima: " + airplane.getMaxCapacity());
-        }
+        printAirlineAndAirplanes(greenLine);
    } 
+
+   private static void addAirplanesToAirline(Airline airline, String model, int maxCapacity, int quantity) {
+       for (int i = 0; i < quantity; i++) {
+           Airplane airplane = new Airplane();
+           airplane.setModel(model);
+           airplane.setMaxCapacity(maxCapacity); // Adicionando capacidade máxima
+           airplane.setAirline(airline); // Defina a companhia aérea para o avião
+           airline.addAirplane(airplane);
+       }
+   }
+
+   private static void printAirlineAndAirplanes(Airline airline) {
+       System.out.println(airline.getName());
+       for (Airplane airplane : airline.getAirplanes()) {
+           System.out.println("Modelo: " + airplane.getModel() + ", Capacidade Máxima: " + airplane.getMaxCapacity());
+       }
+   }
 }
