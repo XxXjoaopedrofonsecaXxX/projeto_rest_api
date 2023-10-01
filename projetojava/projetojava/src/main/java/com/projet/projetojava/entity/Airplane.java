@@ -14,6 +14,7 @@ public class Airplane {
     private String model;
     private int capacity; 
     private int maxCapacity; 
+    private String seatClass; // Novo campo para representar a classe do assento
 
     @ManyToOne
     private Airline airline;
@@ -48,6 +49,14 @@ public class Airplane {
 
 	public void setMaxCapacity(int maxCapacity) {
 		this.maxCapacity = maxCapacity;
+	}
+
+	public String getSeatClass() {
+		return seatClass;
+	}
+
+	public void setSeatClass(String seatClass) {
+		this.seatClass = seatClass;
 	}
 
 	public Airline getAirline() {
