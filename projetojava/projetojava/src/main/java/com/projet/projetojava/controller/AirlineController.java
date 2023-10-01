@@ -54,4 +54,11 @@ public class AirlineController {
     public void removeAirplane(@PathVariable Long id) {
         airlineService.removeAirplane(id);
     }
+
+    // Novos métodos adicionados
+    @GetMapping("/")
+    public List<Airline> getAllAirlines() {
+        return airlineService.getAllAirlines();
+    }
+
 }

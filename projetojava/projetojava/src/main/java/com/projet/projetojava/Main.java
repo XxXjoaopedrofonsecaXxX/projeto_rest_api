@@ -14,6 +14,7 @@ public class Main {
 
 		Airline redLine = 	Airline.createAirLine("Red");
 		Airline greenLine = new Airline();
+		greenLine.setName("Green"); // Definindo o nome da companhia aérea "Green"
 		Airline blueLine = new Airline();
 		blueLine.setName("Blue");
 
