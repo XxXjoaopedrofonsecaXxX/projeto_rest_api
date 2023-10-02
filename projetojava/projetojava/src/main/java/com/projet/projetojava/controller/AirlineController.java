@@ -1,16 +1,15 @@
 package com.projet.projetojava.controller;
 
-import com.projet.projetojava.service.AirlineService;
 import com.projet.projetojava.entity.Airline;
-import com.projet.projetojava.entity.Airplane;
-
-import java.util.List;
-
+import com.projet.projetojava.service.AirlineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/airline")
+@RequestMapping("/api/airlines")
 public class AirlineController {
 
     private final AirlineService airlineService;
@@ -20,45 +19,8 @@ public class AirlineController {
         this.airlineService = airlineService;
     }
 
-    @PostMapping("/create")
-    public void createAirline(@RequestBody String airlineName) {
-        airlineService.createAirline(airlineName);
+    @PostMapping
+    public Airline createAirLine(@RequestBody String name) {
+        return airlineService.createAirLine(name);
     }
-
-    @GetMapping("/{id}")
-    public Airline getAirlineById(@PathVariable Long id) {
-        return airlineService.getAirlineById(id);
-    }
-
-    @GetMapping("/name/{name}")
-    public Long getAirlineIdByName(@PathVariable String name) {
-        return airlineService.getAirlineIdByName(name);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteAirline(@PathVariable Long id) {
-        airlineService.deleteAirline(id);
-    }
-
-    @GetMapping("/airplanes/{id}")
-    public List<Airplane> getAirplanes(@PathVariable Long id) {
-        return airlineService.getAirplanes(id);
-    }
-
-    @PostMapping("/airplane")
-    public void addAirplane(@RequestBody Airplane airplane) {
-        airlineService.addAirplane(airplane);
-    }
-
-    @DeleteMapping("/airplane/{id}")
-    public void removeAirplane(@PathVariable Long id) {
-        airlineService.removeAirplane(id);
-    }
-
-    // Novos métodos adicionados
-    @GetMapping("/")
-    public List<Airline> getAllAirlines() {
-        return airlineService.getAllAirlines();
-    }
-
 }

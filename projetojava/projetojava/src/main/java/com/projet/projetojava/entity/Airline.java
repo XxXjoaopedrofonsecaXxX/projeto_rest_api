@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class Airline {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -25,10 +28,6 @@ public class Airline {
 
     public Airline(String name) {
         this.name = name;
-    }
-
-    public static Airline createAirLine(String name) {
-        return new Airline(name);
     }
 
     public void addAirplane(Airplane airplane) {

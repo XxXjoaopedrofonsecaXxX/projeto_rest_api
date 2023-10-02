@@ -1,30 +1,28 @@
 package com.projet.projetojava.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
 public class Airplane {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String model;
-    private int capacity; 
-    private String seatClass; 
-    private String status; 
-    private String currentLocation; 
 
-    @ManyToOne
+    private String model;
+    private int maxCapacity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airline_id")
     private Airline airline;
 
-    @OneToMany(mappedBy = "airplane")
-    private List<Flight> flights;
+    public Airplane() {
+    }
+
+    public Airplane(String model, int maxCapacity, Airline airline) {
+        this.model = model;
+        this.maxCapacity = maxCapacity;
+        this.airline = airline;
+    }
 
 	public Long getId() {
 		return id;
@@ -42,36 +40,12 @@ public class Airplane {
 		this.model = model;
 	}
 
-	public int getCapacity() {
-		return capacity;
+	public int getMaxCapacity() {
+		return maxCapacity;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-	public String getSeatClass() {
-		return seatClass;
-	}
-
-	public void setSeatClass(String seatClass) {
-		this.seatClass = seatClass;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getCurrentLocation() {
-		return currentLocation;
-	}
-
-	public void setCurrentLocation(String currentLocation) {
-		this.currentLocation = currentLocation;
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
 	}
 
 	public Airline getAirline() {
@@ -79,14 +53,6 @@ public class Airplane {
 	}
 
 	public void setAirline(Airline airline) {
-		this.airline = airline;
-	}
-    
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
+        this.airline = airline;
     }
 }
