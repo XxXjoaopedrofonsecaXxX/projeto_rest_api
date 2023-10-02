@@ -39,24 +39,24 @@ public class Flight {
 
 	private String airplaneModel;
 
-    public Flight() {} // Construtor padrão necessário para JPA
+	public Flight() {} // Construtor padrão necessário para JPA
 
-    public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.duration = duration;
-    }
+	public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
+		this.flightNumber = flightNumber;
+		this.airline = airline;
+		this.origin = origin;
+		this.destination = destination;
+		this.duration = duration;
+	}
 
-    public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration, FlightClass flightClass) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.duration = duration; 
-        this.flightClass = flightClass; 
-    }
+	public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration, FlightClass flightClass) {
+		this.flightNumber = flightNumber;
+		this.airline = airline;
+		this.origin = origin;
+		this.destination = destination;
+		this.duration = duration; 
+		this.flightClass = flightClass; 
+	}
 
 	public Flight(Airline airline, String airplaneModel, String origin, String destination, String departureTime, String arrivalTime) {
 		this.airline = airline;
@@ -99,3 +99,5 @@ public class Flight {
 		return this.passengers;
 	}
 }
+
+
