@@ -30,7 +30,7 @@ public class Flight {
     @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
     private FlightClass flightClass; // Classe do voo (Executiva, Primeira Classe, Econômica)
 
-    @OneToOne(mappedBy = "flight") // Indica uma relação um-para-muitos com a entidade Passenger
+    @OneToMany(mappedBy = "flight") // Indica uma relação um-para-muitos com a entidade Passenger
     private List<Passenger> passengers; // Lista de passageiros
 
 	private String arrivalTime;

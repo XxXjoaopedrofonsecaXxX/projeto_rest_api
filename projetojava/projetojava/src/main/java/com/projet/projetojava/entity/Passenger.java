@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Passenger {
@@ -20,8 +21,9 @@ public class Passenger {
     private String cpf;
     private String rg;
 
-    @ManyToOne
-    private Flight flight; // O voo no qual o passageiro está
+	@ManyToOne
+	@JoinColumn(name="flight_id", nullable=false)
+	private Flight flight; // O voo no qual o passageiro está
 
 	private String flightTime;
 
@@ -101,7 +103,7 @@ public class Passenger {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, flight, id, name, passportNumber, rg);
+		return Objects.hash(cpf, flight, flightTime, id, name, passportNumber, rg);
 	}
 
 	@Override
@@ -113,7 +115,8 @@ public class Passenger {
 		if (getClass() != obj.getClass())
 			return false;
 		Passenger other = (Passenger) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(flight, other.flight) && Objects.equals(id, other.id)
+		return Objects.equals(cpf, other.cpf) && Objects.equals(flight, other.flight)
+				&& Objects.equals(flightTime, other.flightTime) && Objects.equals(id, other.id)
 				&& Objects.equals(name, other.name) && Objects.equals(passportNumber, other.passportNumber)
 				&& Objects.equals(rg, other.rg);
 	}
