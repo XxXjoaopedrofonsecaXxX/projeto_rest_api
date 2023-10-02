@@ -23,7 +23,16 @@ public class Passenger {
     @ManyToOne
     private Flight flight; // O voo no qual o passageiro está
 
+	private String flightTime;
+
     public Passenger() {
+    }
+
+    public Passenger(String name, String cpf, String passportNumber, String flightTime) {
+        this.name = name;
+        this.cpf = cpf;
+        this.passportNumber = passportNumber;
+        this.flightTime = flightTime;
     }
 
     public Passenger(String name, String passportNumber, String cpf, String rg, Flight flight) {
