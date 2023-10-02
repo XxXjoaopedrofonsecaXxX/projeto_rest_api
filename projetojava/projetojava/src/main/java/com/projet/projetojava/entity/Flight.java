@@ -1,13 +1,7 @@
 package com.projet.projetojava.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import java.time.Duration;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -16,77 +10,53 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String flightNumber;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airline_id", nullable = false)
     private Airline airline; // Referência à entidade Airline
     
+    @Column(nullable = false)
     private String origin;
+    
+    @Column(nullable = false)
     private String destination;
+    
+    @Column(nullable = false)
     private Duration duration; // Duração do voo
 
+    public Flight() {}
+
     public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
-        this.setFlightNumber(flightNumber);
+        this.flightNumber = flightNumber;
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
         this.duration = duration; // Definindo a duração do voo
     }
 
-	public String getFlightNumber() {
-		return flightNumber;
-	}
-
-	public void setFlightNumber(String flightNumber) {
-		this.flightNumber = flightNumber;
-	}
-
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public String getFlightNumber() {
+		return this.flightNumber;
 	}
 
 	public Airline getAirline() {
-		return airline;
-	}
-
-	public void setAirline(Airline airline) {
-		this.airline = airline;
+		return this.airline;
 	}
 
 	public String getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(String origin) {
-		this.origin = origin;
+		return this.origin;
 	}
 
 	public String getDestination() {
-		return destination;
+		return this.destination;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-	
 	public Duration getDuration() {
-	    return duration; // Getter para a duração do voo
-	}
-	
-	public void setDuration(Duration duration) {
-	    this.duration = duration; // Setter para a duração do voo
-	}
-	
-	public static void sortFlightsByDuration(List<Flight> flights) {
-	    Collections.sort(flights, new Comparator<Flight>() {
-	        @Override
-	        public int compare(Flight f1, Flight f2) {
-	            return f1.getDuration().compareTo(f2.getDuration());
-	        }
-	    });
+		return this.duration;
 	}
 }
