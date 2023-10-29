@@ -1,37 +1,47 @@
 package com.projet.projetojava.entity;
 
-import jakarta.persistence.*;
 import java.time.Duration;
 import java.util.List;
 
-@Entity // Indica que esta classe é uma entidade JPA
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Flight {
-    @Id // Indica que este campo é a chave primária
-    @GeneratedValue(strategy = GenerationType.AUTO) // Indica que o valor será gerado automaticamente
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
+    @Column(nullable = false)
     private String flightNumber;
     
-    @ManyToOne(fetch = FetchType.LAZY) // Indica uma relação muitos-para-um com a entidade Airline
-    @JoinColumn(name = "airline_id", nullable = false) // Indica a coluna de junção no banco de dados
-    private Airline airline; // Referência à entidade Airline
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "airline_id", nullable = false)
+    private Airline airline;
     
-    @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
+    @Column(nullable = false)
     private String origin;
     
-    @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
+    @Column(nullable = false)
     private String destination;
     
-    @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
-    private Duration duration; // Duração do voo
+    @Column(nullable = false)
+    private Duration duration;
 
-    @Enumerated(EnumType.STRING) // Indica que este campo é um enum e deve ser armazenado como string no banco de dados
-    @Column(nullable = false) // Indica que este campo não pode ser nulo no banco de dados
-    private FlightClass flightClass; // Classe do voo (Executiva, Primeira Classe, Econômica)
+    @Enumerated(EnumType.STRING)
+    private FlightClass flightClass;
 
-    @OneToMany(mappedBy = "flight") // Indica uma relação um-para-muitos com a entidade Passenger
-    private List<Passenger> passengers; // Lista de passageiros
+    @OneToMany(mappedBy = "flight")
+    private List<Passenger> passengers;
 
 	private String arrivalTime;
 
@@ -39,7 +49,7 @@ public class Flight {
 
 	private String airplaneModel;
 
-	public Flight() {} // Construtor padrão necessário para JPA
+	public Flight() {}
 
 	public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
 		this.flightNumber = flightNumber;
@@ -50,11 +60,7 @@ public class Flight {
 	}
 
 	public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration, FlightClass flightClass) {
-		this.flightNumber = flightNumber;
-		this.airline = airline;
-		this.origin = origin;
-		this.destination = destination;
-		this.duration = duration; 
+		this(flightNumber, airline, origin, destination, duration);
 		this.flightClass = flightClass; 
 	}
 
@@ -99,5 +105,3 @@ public class Flight {
 		return this.passengers;
 	}
 }
-
-
