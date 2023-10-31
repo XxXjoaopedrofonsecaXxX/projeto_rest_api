@@ -33,8 +33,9 @@ public class Flight {
     
     @Column(nullable = false)
     private String destination;
-    
-    @Column(nullable = false)
+
+    // Altere a anotação Column para permitir valores NULL na coluna duration
+    @Column(nullable = true)
     private Duration duration;
 
     @Enumerated(EnumType.STRING)
