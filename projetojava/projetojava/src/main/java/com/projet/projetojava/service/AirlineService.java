@@ -22,4 +22,9 @@ public class AirlineService {
     public Airline findByName(String name) {
         return airlineRepository.findByName(name);
     }
+
+	public void save(Airline airline) {
+		// TODO Auto-generated method stub
+		
+	}
 }
