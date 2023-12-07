@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FlightTest {
     private Flight flight;
-   //
+   
     // Este método é executado antes de cada teste. Ele configura o ambiente de teste.
     @BeforeEach
     public void setUp() {
