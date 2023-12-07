@@ -21,17 +21,17 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String flightNumber;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "airline_id", nullable = false)
+    @JoinColumn(name = "airline_id", nullable = true)
     private Airline airline;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String origin;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String destination;
 
     // Altere a anotação Column para permitir valores NULL na coluna duration

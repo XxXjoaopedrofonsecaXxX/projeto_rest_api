@@ -22,7 +22,7 @@ public class Passenger {
     private String rg;
 
 	@ManyToOne
-	@JoinColumn(name="flight_id", nullable=false)
+	@JoinColumn(name="flight_id", nullable=true)
 	private Flight flight; // O voo no qual o passageiro está
 
 	private String flightTime;

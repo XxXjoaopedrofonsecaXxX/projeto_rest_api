@@ -18,6 +18,10 @@ public class Airplane {
     public Airplane() {
     }
 
+    public Airplane(String model) {
+        this.model = model;
+    }
+
     public Airplane(String model, int maxCapacity, Airline airline) {
         this.model = model;
         this.maxCapacity = maxCapacity;
