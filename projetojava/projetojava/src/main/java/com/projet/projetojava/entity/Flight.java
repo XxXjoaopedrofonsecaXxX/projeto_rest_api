@@ -105,4 +105,9 @@ public class Flight {
 	public List<Passenger> getPassengers() {
 		return this.passengers;
 	}
+
+	public void setAirline(Airline airline2) {
+		// TODO Auto-generated method stub
+		
+	}
 }

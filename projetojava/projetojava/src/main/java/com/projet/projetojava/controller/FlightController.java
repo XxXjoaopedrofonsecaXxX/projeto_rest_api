@@ -26,6 +26,9 @@ public class FlightController {
     @PostMapping
     public Flight createFlight(@RequestBody Flight flight) {
         Airline airline = airlineService.findByName(flight.getAirline().getName());
+        if (airline != null) {
+            flight.setAirline(airline);
+        }
         return flightService.createFlight(flight.getFlightNumber(), airline, flight.getOrigin(), flight.getDestination(), flight.getDuration());
     }
 }

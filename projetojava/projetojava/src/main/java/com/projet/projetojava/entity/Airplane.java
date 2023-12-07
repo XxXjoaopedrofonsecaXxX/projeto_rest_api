@@ -15,11 +15,13 @@ public class Airplane {
     @JoinColumn(name = "airline_id")
     private Airline airline;
 
-    public Airplane() {
-    }
-
     public Airplane(String model) {
         this.model = model;
+    }
+
+    public Airplane(String model, Airline airline) {
+        this.model = model;
+        this.airline = airline;
     }
 
     public Airplane(String model, int maxCapacity, Airline airline) {
@@ -28,35 +30,38 @@ public class Airplane {
         this.airline = airline;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Airline getAirline() {
+        return this.airline;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public int getMaxCapacity() {
-		return maxCapacity;
-	}
-
-	public void setMaxCapacity(int maxCapacity) {
-		this.maxCapacity = maxCapacity;
-	}
-
-	public Airline getAirline() {
-		return airline;
-	}
-
-	public void setAirline(Airline airline) {
+    public void setAirline(Airline airline) {
         this.airline = airline;
+        if (airline != null && !airline.getAirplanes().contains(this)) {
+            airline.getAirplanes().add(this);
+        }
+    }
+
+    public String getModel() {
+        return this.model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getMaxCapacity() {
+        return this.maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

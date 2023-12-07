@@ -1,12 +1,6 @@
 package com.projet.projetojava.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,30 +26,32 @@ public class Airline {
 
     public void addAirplane(Airplane airplane) {
         this.airplanes.add(airplane);
-        airplane.setAirline(this);
+        if (airplane.getAirline() != this) {
+            airplane.setAirline(this);
+        }
     }
 
-	public Long getId() {
-		return id;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public List<Airplane> getAirplanes() {
-		return airplanes;
-	}
-
-	public void setAirplanes(List<Airplane> airplanes) {
-		this.airplanes = airplanes;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Airplane> getAirplanes() {
+        return this.airplanes;
+    }
+
+    public void setAirplanes(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
     }
 }

@@ -25,6 +25,9 @@ public class AirplaneController {
     @PostMapping
     public Airplane createAirplane(@RequestBody Airplane airplane) {
         Airline airline = airlineService.findByName(airplane.getAirline().getName());
+        if (airline != null) {
+            airplane.setAirline(airline);
+        }
         return airplaneService.createAirplane(airplane.getModel(), airplane.getMaxCapacity(), airline);
     }
 
