@@ -17,19 +17,7 @@ public class Ticket {
     private String cpf;
     private String rg;
 
-    // Adicione seus campos e métodos aqui
-
-    public boolean isCpfValid() {
-        // Implemente a lógica de validação do CPF aqui
-        return true;
-    }
-
-    public boolean isRgValid() {
-        // Implemente a lógica de validação do RG aqui
-        return true;
-    }
-
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -58,7 +46,11 @@ public class Ticket {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		if (isCpfValid(cpf)) {
+			this.cpf = cpf;
+		} else {
+			throw new IllegalArgumentException("CPF inválido");
+		}
 	}
 
 	public String getRg() {
@@ -66,6 +58,20 @@ public class Ticket {
 	}
 
 	public void setRg(String rg) {
-		this.rg = rg;
+		if (isRgValid(rg)) {
+			this.rg = rg;
+		} else {
+			throw new IllegalArgumentException("RG inválido");
+		}
 	}
+
+    public boolean isCpfValid(String cpf) {
+        // Implemente a lógica de validação do CPF aqui
+        return cpf != null && cpf.length() == 11 && cpf.chars().allMatch(Character::isDigit);
+    }
+
+    public boolean isRgValid(String rg) {
+        // Implemente a lógica de validação do RG aqui
+        return rg != null && rg.length() >= 5 && rg.length() <= 14 && rg.chars().allMatch(Character::isLetterOrDigit);
+    }
 }

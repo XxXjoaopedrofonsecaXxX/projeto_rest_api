@@ -25,6 +25,54 @@ public class Passenger {
 	@JoinColumn(name="flight_id", nullable=true)
 	private Flight flight; // O voo no qual o passageiro está
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassportNumber() {
+		return passportNumber;
+	}
+
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+
+	public String getFlightTime() {
+		return flightTime;
+	}
+
+	public void setFlightTime(String flightTime) {
+		this.flightTime = flightTime;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
 	private String flightTime;
 
     public Passenger() {
