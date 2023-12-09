@@ -1,8 +1,8 @@
 package entity.test;
 
 import com.projet.projetojava.entity.Ticket;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TicketTest {
 
@@ -10,15 +10,15 @@ public class TicketTest {
     @Test
     public void testIsCpfValid() {
         Ticket ticket = new Ticket();
-        Assert.assertTrue(ticket.isCpfValid("12345678909")); // CPF válido
-        Assert.assertFalse(ticket.isCpfValid("1234567890")); // CPF inválido
+        Assertions.assertTrue(ticket.isCpfValid("12345678909")); // CPF válido
+        Assertions.assertFalse(ticket.isCpfValid("1234567890")); // CPF inválido
     }
 
     // Teste para verificar se o método isRgValid funciona corretamente
     @Test
     public void testIsRgValid() {
         Ticket ticket = new Ticket();
-        Assert.assertTrue(ticket.isRgValid("123456789")); // RG válido
-        Assert.assertFalse(ticket.isRgValid("1234")); // RG inválido
+        Assertions.assertTrue(ticket.isRgValid("123456789")); // RG válido
+        Assertions.assertFalse(ticket.isRgValid("1234")); // RG inválido
     }
 }

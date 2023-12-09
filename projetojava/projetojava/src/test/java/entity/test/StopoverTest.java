@@ -1,8 +1,8 @@
 package entity.test;
 
 import com.projet.projetojava.entity.Stopover;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
@@ -13,7 +13,7 @@ public class StopoverTest {
     public void testGetDuration() {
         Stopover stopover = new Stopover();
         stopover.setDuration(Duration.ofHours(2));
-        Assert.assertEquals(Duration.ofHours(2), stopover.getDuration());
+        Assertions.assertEquals(Duration.ofHours(2), stopover.getDuration());
     }
 
     // Teste para verificar se o método getAirport funciona corretamente
@@ -21,6 +21,6 @@ public class StopoverTest {
     public void testGetAirport() {
         Stopover stopover = new Stopover();
         stopover.setAirport("GRU");
-        Assert.assertEquals("GRU", stopover.getAirport());
+        Assertions.assertEquals("GRU", stopover.getAirport());
     }
 }
