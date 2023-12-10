@@ -15,6 +15,10 @@ public class Airplane {
     @JoinColumn(name = "airline_id")
     private Airline airline;
 
+    public Airplane() {
+        // construtor padrão
+    }
+
     public Airplane(String model) {
         this.model = model;
     }

@@ -8,8 +8,6 @@ import com.projet.projetojava.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Duration;
-
 @RestController
 @RequestMapping("/api/flights")
 public class FlightController {
@@ -29,6 +27,6 @@ public class FlightController {
         if (airline != null) {
             flight.setAirline(airline);
         }
-        return flightService.createFlight(flight.getFlightNumber(), airline, flight.getOrigin(), flight.getDestination(), flight.getDuration());
+        return flightService.createFlight(flight);
     }
 }
