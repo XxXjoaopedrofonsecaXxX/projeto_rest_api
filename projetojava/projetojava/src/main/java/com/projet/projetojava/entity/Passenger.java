@@ -1,5 +1,7 @@
 package com.projet.projetojava.entity;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -21,153 +23,101 @@ public class Passenger {
     private String cpf;
     private String rg;
 
-	@ManyToOne
-	@JoinColumn(name="flight_id", nullable=true)
-	private Flight flight; // O voo no qual o passageiro está
+    @ManyToOne
+    @JoinColumn(name="flight_id", nullable=true)
+    private Flight flight; // O voo no qual o passageiro está
 
-	public Long getId() {
-		return id;
-	}
+    private String flightTime;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassportNumber() {
-		return passportNumber;
-	}
-
-	public void setPassportNumber(String passportNumber) {
-		this.passportNumber = passportNumber;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
-	public String getFlightTime() {
-		return flightTime;
-	}
-
-	public void setFlightTime(String flightTime) {
-		this.flightTime = flightTime;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public String getRg() {
-		return rg;
-	}
-
-	private String flightTime;
+    private LocalDate birthDate;
 
     public Passenger() {
     }
 
-    public Passenger(String name, String cpf, String passportNumber, String flightTime) {
+    public Passenger(String name, String cpf, String passportNumber, String flightTime, LocalDate birthDate) {
         this.name = name;
         this.cpf = cpf;
         this.passportNumber = passportNumber;
         this.flightTime = flightTime;
+        this.birthDate = birthDate;
     }
 
-    public Passenger(String name, String passportNumber, String cpf, String rg, Flight flight) {
+    public Passenger(String name, String passportNumber, String cpf, String rg, Flight flight, LocalDate birthDate) {
         this.name = name;
         this.passportNumber = passportNumber;
-        setCpf(cpf); // Use o setter para que a validação seja feita
-        setRg(rg); // Use o setter para que a validação seja feita
+        this.cpf = cpf;
+        this.rg = rg;
         this.flight = flight; // Definindo o voo do passageiro
+        this.birthDate = birthDate;
     }
 
-	// ... getters e setters ...
+    public String getName() {
+        return this.name;
+    }
 
-	public void setCpf(String cpf) {
-		if (isCpfValid(cpf)) {
-			this.cpf = cpf;
-		} else {
-			throw new IllegalArgumentException("CPF inválido");
-		}
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setRg(String rg) {
-		if (isRgValid(rg)) {
-			this.rg = rg;
-		} else {
-			throw new IllegalArgumentException("RG inválido");
-		}
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public boolean isCpfValid(String cpf) {
-	    if (cpf == null || cpf.length() != 11 || !cpf.chars().allMatch(Character::isDigit)) {
-	        return false;
-	    }
+    public Flight getFlight() {
+        return flight;
+    }
 
-	    int[] numbers = cpf.chars().map(Character::getNumericValue).toArray();
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 
-	    int sum = 0;
-	    for (int i = 0; i < 9; i++) {
-	        sum += numbers[i] * (10 - i);
-	    }
-	    int firstCheckDigit = 11 - (sum % 11);
-	    if (firstCheckDigit >= 10) firstCheckDigit = 0;
+    public String getFlightTime() {
+        return flightTime;
+    }
 
-	    sum = 0;
-	    for (int i = 0; i < 10; i++) {
-	        sum += numbers[i] * (11 - i);
-	    }
-	    int secondCheckDigit = 11 - (sum % 11);
-	    if (secondCheckDigit >= 10) secondCheckDigit = 0;
+    public void setFlightTime(String flightTime) {
+        this.flightTime = flightTime;
+    }
 
-	    return firstCheckDigit == numbers[9] && secondCheckDigit == numbers[10];
-	}
-	
-	public boolean isRgValid(String rg) {
-	    if (rg == null || rg.length() < 5 || rg.length() > 14) {
-	        return false;
-	    }
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
-	    for (char c : rg.toCharArray()) {
-	        if (!Character.isLetterOrDigit(c)) {
-	            return false;
-	        }
-	    }
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
-	    return true;
-	}
+    public int getAge() {
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf, flight, flightTime, id, name, passportNumber, rg);
-	}
+    public boolean isRgValid(String rg) {
+        return rg.matches("[0-9]{7}[A-Z]");
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Passenger other = (Passenger) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(flight, other.flight)
-				&& Objects.equals(flightTime, other.flightTime) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(passportNumber, other.passportNumber)
-				&& Objects.equals(rg, other.rg);
-	}
-	
-	// ... equals, hashCode ...
+    public boolean isCpfValid(String cpf) {
+        return cpf.matches("[0-9]{11}");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Passenger passenger = (Passenger) obj;
+        return Objects.equals(id, passenger.id) &&
+               Objects.equals(name, passenger.name) &&
+               Objects.equals(passportNumber, passenger.passportNumber) &&
+               Objects.equals(cpf, passenger.cpf) &&
+               Objects.equals(rg, passenger.rg) &&
+               Objects.equals(flight, passenger.flight) &&
+               Objects.equals(flightTime, passenger.flightTime) &&
+               Objects.equals(birthDate, passenger.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, passportNumber, cpf, rg, flight, flightTime, birthDate);
+    }
 }

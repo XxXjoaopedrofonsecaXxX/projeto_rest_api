@@ -13,6 +13,8 @@ import com.projet.projetojava.repository.AirplaneRepository;
 import com.projet.projetojava.repository.FlightRepository;
 import com.projet.projetojava.repository.PassengerRepository;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
@@ -50,7 +52,7 @@ public class Main implements CommandLineRunner {
         // similar for other flights
 
         // Adicionando passageiros
-        addPassengers("John Doe", "123456789", "AB123456", "2023-10-02T14:30:00");
+        addPassengers("John Doe", "123456789", "AB123456", "2023-10-02T14:30:00", LocalDate.of(1993, 6, 8));
 
         // similar for other passengers
     }
@@ -67,8 +69,8 @@ public class Main implements CommandLineRunner {
        flightRepository.save(flight);
    }
 
-   private void addPassengers(String name, String cpf, String passportNumber, String flightTime) {
-       Passenger passenger = new Passenger(name, cpf, passportNumber, flightTime);
+   private void addPassengers(String name, String cpf, String passportNumber, String flightTime, LocalDate birthDate) {
+       Passenger passenger = new Passenger(name, cpf, passportNumber, flightTime, birthDate);
        passengerRepository.save(passenger);
    }
 }
