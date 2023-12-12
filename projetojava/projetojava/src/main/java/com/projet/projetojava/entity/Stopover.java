@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
 
 import java.time.Duration;
 
@@ -22,7 +21,6 @@ public class Stopover {
     @NotEmpty
     private String airport; // O aeroporto onde ocorre a escala
 
-    @Positive
     private Duration duration; // A duração da escala
 
     public Stopover() {
@@ -31,7 +29,7 @@ public class Stopover {
     public Stopover(Flight flight, String airport, Duration duration) {
         this.flight = flight;
         this.airport = airport;
-        this.duration = duration;
+        setDuration(duration);
     }
 
 	public Long getId() {
@@ -63,7 +61,10 @@ public class Stopover {
 	}
 
 	public void setDuration(Duration duration) {
-		this.duration = duration;
+	    if (duration == null || duration.isNegative()) {
+	        throw new IllegalArgumentException("Duration must be positive");
+	    }
+	    this.duration = duration;
 	}
 	
 	@Override
