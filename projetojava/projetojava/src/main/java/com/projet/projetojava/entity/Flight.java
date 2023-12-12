@@ -38,16 +38,17 @@ public class Flight {
     private String departureTime;
     private String airplaneModel;
 
+    // Construtor protegido sem argumentos para JPA
     protected Flight() {}
 
+    // Construtores públicos para criação de objetos Flight
     public Flight(String flightNumber, Airline airline) {
         this.flightNumber = flightNumber;
         this.airline = airline;
     }
 
     public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration, FlightClass flightClass) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
+        this(flightNumber, airline);  // Reutilizando o construtor acima
         this.origin = origin;
         this.destination = destination;
         this.duration = duration;
@@ -55,11 +56,7 @@ public class Flight {
     }
 
     public Flight(String flightNumber, Airline airline, String origin, String destination, Duration duration) {
-        this.flightNumber = flightNumber;
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.duration = duration;
+        this(flightNumber, airline, origin, destination, duration, null);  // Reutilizando o construtor acima
     }
 
     public Flight(Airline airline, String airplaneModel, String origin, String destination, String departureTime, String arrivalTime) {
@@ -71,7 +68,7 @@ public class Flight {
         this.arrivalTime = arrivalTime;
     }
 
-    // Getters and setters...
+    // Getters e setters...
 
     public void setAirline(Airline airline) {
         this.airline = airline;
