@@ -1,5 +1,6 @@
 package entity.test;
 
+import com.projet.projetojava.entity.Flight;
 import com.projet.projetojava.entity.Stopover;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,4 +24,9 @@ public class StopoverTest {
         stopover.setAirport("GRU");
         Assertions.assertEquals("GRU", stopover.getAirport());
     }
+
+	public static Stopover createStopover(Flight flight, String airport, Duration duration) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
