@@ -39,7 +39,7 @@ public class Flight {
     private String airplaneModel;
 
     // Construtor protegido sem argumentos para JPA
-    protected Flight() {}
+    public Flight() {}
 
     // Construtores públicos para criação de objetos Flight
     public Flight(String flightNumber, Airline airline) {
@@ -106,5 +106,20 @@ public class Flight {
 	public void setId(long l) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void setMaxCapacity(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Short getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Short getMaxCapacity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
