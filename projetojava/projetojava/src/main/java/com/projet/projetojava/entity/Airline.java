@@ -48,10 +48,10 @@ public class Airline {
     }
 
     public List<Airplane> getAirplanes() {
-        return this.airplanes;
+        return new ArrayList<>(this.airplanes);
     }
 
     public void setAirplanes(List<Airplane> airplanes) {
-        this.airplanes = airplanes;
+        this.airplanes = new ArrayList<>(airplanes);
     }
 }

@@ -2,17 +2,19 @@ package com.projet.projetojava.controller;
 
 import com.projet.projetojava.entity.Airline;
 import com.projet.projetojava.service.AirlineService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/airlines")
 public class AirlineController {
 
     private final AirlineService airlineService;
+    private static final Logger logger = LoggerFactory.getLogger(AirlineController.class);
 
     @Autowired
     public AirlineController(AirlineService airlineService) {
@@ -20,7 +22,9 @@ public class AirlineController {
     }
 
     @PostMapping
-    public Airline createAirLine(@RequestBody String name) {
+    public Airline createAirLine(@RequestBody Map<String, String> body) {
+        String name = body.get("name");
+        logger.info("createAirLine called with name: " + name);
         return airlineService.createAirLine(name);
     }
 }

@@ -67,6 +67,11 @@
 			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Adicionando a dependência de logging -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
