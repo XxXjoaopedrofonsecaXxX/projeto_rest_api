@@ -97,4 +97,9 @@ public class Flight {
     public Duration getDuration() {
         return this.duration;
     }
+
+	public void setModel(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
