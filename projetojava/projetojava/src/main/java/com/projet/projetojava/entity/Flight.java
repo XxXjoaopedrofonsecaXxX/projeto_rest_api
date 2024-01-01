@@ -102,4 +102,9 @@ public class Flight {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setId(long l) {
+		// TODO Auto-generated method stub
+		
+	}
 }
