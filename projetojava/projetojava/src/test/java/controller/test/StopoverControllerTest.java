@@ -30,20 +30,22 @@ public class StopoverControllerTest {
 
     @Test
     public void testCreateStopover() {
-        Stopover stopover = new Stopover();
-        stopover.setAirport("Airport Test");
-        stopover.setDuration(Duration.ofHours(2));
-
+        // Cria um mock de Flight
         Flight flight = new Flight();
         flight.setId(1L);
 
-        when(flightService.findById(stopover.getFlight().getId())).thenReturn(flight);
+        // Cria um mock de Stopover
+        Stopover stopover = new Stopover(flight, "Airport Test", Duration.ofHours(2));
+
+        // Configura os mocks para retornar os objetos esperados
+        when(flightService.findById(flight.getId())).thenReturn(flight);
         when(stopoverService.createStopover(flight, stopover.getAirport(), stopover.getDuration())).thenReturn(stopover);
 
+        // Chama o método que está sendo testado
         Stopover result = stopoverController.createStopover(stopover);
 
+        // Verifica se o resultado é o esperado
         assertEquals(stopover.getAirport(), result.getAirport());
         assertEquals(stopover.getDuration(), result.getDuration());
     }
 }
-//

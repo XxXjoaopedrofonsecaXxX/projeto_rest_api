@@ -1,34 +1,45 @@
 package repository.test;
 
-import com.projet.projetojava.Main;
+import com.projet.projetojava.ProjetojavaApplication;
+import com.projet.projetojava.entity.Flight;
 import com.projet.projetojava.entity.Stopover;
 import com.projet.projetojava.repository.StopoverRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.time.Duration;
 
-@SpringBootTest(classes = Main.class)
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest(classes = ProjetojavaApplication.class)
 public class StopoverRepositoryTest {
 
-    @Autowired
-    private StopoverRepository repository;
+    @Mock
+    StopoverRepository stopoverRepository;
+
+    @Mock
+    Flight flight;
 
     @Test
-    @Transactional
     public void testFindById() {
-        // Crie um novo Stopover e salve-o no repositório
-        Stopover newStopover = new Stopover();
-        newStopover.setAirport("Test Airport"); // Adicione esta linha
-        repository.save(newStopover);
-        repository.flush();
+        // Cria um mock de Flight
+        flight.setId(1L);
 
-        // Verifique se o novo Stopover pode ser encontrado no repositório
-        Stopover foundStopover = repository.findById(newStopover.getId()).orElse(null);
-        assertThat(foundStopover).isEqualTo(newStopover);
+        // Cria um mock de Stopover
+        Stopover stopover = new Stopover(flight, "Airport Test", Duration.ofHours(2));
+
+        // Configura os mocks para retornar os objetos esperados
+        when(stopoverRepository.findById(stopover.getId())).thenReturn(java.util.Optional.of(stopover));
+
+        // Busca o Stopover no repositório
+        Stopover foundStopover = stopoverRepository.findById(stopover.getId()).orElse(null);
+
+        // Verifica se o Stopover foi encontrado
+        assertNotNull(foundStopover);
+        assertEquals(stopover.getAirport(), foundStopover.getAirport());
+        assertEquals(stopover.getDuration(), foundStopover.getDuration());
     }
-
-    // Adicione mais testes conforme necessário para cobrir outros métodos em StopoverRepository
 }

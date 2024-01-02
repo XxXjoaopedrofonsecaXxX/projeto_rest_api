@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -16,6 +17,7 @@ public class Stopover {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "flight_id", nullable = false)
     private Flight flight; // Referência ao voo ao qual esta escala pertence
 
     @NotEmpty
@@ -27,6 +29,9 @@ public class Stopover {
     }
 
     public Stopover(Flight flight, String airport, Duration duration) {
+        if (flight == null) {
+            throw new IllegalArgumentException("Flight cannot be null");
+        }
         this.flight = flight;
         this.airport = airport;
         setDuration(duration);
@@ -45,6 +50,9 @@ public class Stopover {
 	}
 
 	public void setFlight(Flight flight) {
+		if (flight == null) {
+            throw new IllegalArgumentException("Flight cannot be null");
+        }
 		this.flight = flight;
 	}
 

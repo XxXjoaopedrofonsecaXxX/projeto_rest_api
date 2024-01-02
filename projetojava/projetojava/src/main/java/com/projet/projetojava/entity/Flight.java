@@ -16,7 +16,7 @@ public class Flight {
     private String flightNumber;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "airline_id")
+    @JoinColumn(name = "airline_id", nullable = false)
     private Airline airline;
     
     @Column
@@ -38,11 +38,14 @@ public class Flight {
     private String departureTime;
     private String airplaneModel;
 
-    // Construtor protegido sem argumentos para JPA
+    // Construtor público sem argumentos para JPA
     public Flight() {}
 
     // Construtores públicos para criação de objetos Flight
     public Flight(String flightNumber, Airline airline) {
+        if (airline == null) {
+            throw new IllegalArgumentException("Airline cannot be null");
+        }
         this.flightNumber = flightNumber;
         this.airline = airline;
     }
@@ -60,6 +63,9 @@ public class Flight {
     }
 
     public Flight(Airline airline, String airplaneModel, String origin, String destination, String departureTime, String arrivalTime) {
+        if (airline == null) {
+            throw new IllegalArgumentException("Airline cannot be null");
+        }
         this.airline = airline;
         this.airplaneModel = airplaneModel;
         this.origin = origin;
@@ -71,6 +77,9 @@ public class Flight {
     // Getters e setters...
 
     public void setAirline(Airline airline) {
+        if (airline == null) {
+            throw new IllegalArgumentException("Airline cannot be null");
+        }
         this.airline = airline;
     }
 
@@ -98,28 +107,26 @@ public class Flight {
         return this.duration;
     }
 
-	public void setModel(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+    public String getModel() {
+        return this.airplaneModel;
+    }
 
-	public void setId(long l) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void setModel(String model) {
+        this.airplaneModel = model;
+    }
 
 	public void setMaxCapacity(int i) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public Short getModel() {
+	public Short getMaxCapacity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Short getMaxCapacity() {
+	public void setId(long l) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }

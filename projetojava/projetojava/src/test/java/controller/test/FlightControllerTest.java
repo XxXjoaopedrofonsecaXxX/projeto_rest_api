@@ -28,18 +28,24 @@ public class FlightControllerTest {
 
     @Test
     public void testCreateFlight() {
-        Flight flight = new Flight();
-        flight.setModel("Model Test");
-        flight.setMaxCapacity(200);
-
+        // Cria um mock de Airline
         Airline airline = new Airline();
         airline.setName("Airline Test");
 
-        when(airlineService.findByName(flight.getAirline().getName())).thenReturn(airline);
+        // Cria um mock de Flight
+        Flight flight = new Flight();
+        flight.setModel("Model Test");
+        flight.setMaxCapacity(200);
+        flight.setAirline(airline);  // Adiciona a companhia aérea ao voo
+
+        // Configura os mocks para retornar os objetos esperados
+        when(airlineService.findByName(airline.getName())).thenReturn(airline);
         when(flightService.createFlight(flight)).thenReturn(flight);
 
+        // Chama o método que está sendo testado
         Flight result = flightController.createFlight(flight);
 
+        // Verifica se o resultado é o esperado
         assertEquals(flight.getModel(), result.getModel());
         assertEquals(flight.getMaxCapacity(), result.getMaxCapacity());
         assertEquals(airline.getName(), result.getAirline().getName());
