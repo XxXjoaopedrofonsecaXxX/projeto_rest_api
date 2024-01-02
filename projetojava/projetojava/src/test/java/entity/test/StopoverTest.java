@@ -25,8 +25,11 @@ public class StopoverTest {
         Assertions.assertEquals("GRU", stopover.getAirport());
     }
 
-	public static Stopover createStopover(Flight flight, String airport, Duration duration) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // Método para criar um Stopover
+    public static Stopover createStopover(Flight flight, String airport, Duration duration) {
+        if (flight == null) {
+            throw new IllegalArgumentException("Flight cannot be null");
+        }
+        return new Stopover(flight, airport, duration);
+    }
 }
