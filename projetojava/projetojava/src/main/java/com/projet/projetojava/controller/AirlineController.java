@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,5 +27,11 @@ public class AirlineController {
         String name = body.get("name");
         logger.info("createAirLine called with name: " + name);
         return airlineService.createAirLine(name);
+    }
+
+    @GetMapping
+    public List<Airline> getAllAirlines() {
+        logger.info("getAllAirlines called");
+        return airlineService.getAllAirlines();
     }
 }

@@ -5,6 +5,8 @@ import com.projet.projetojava.repository.AirlineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AirlineService {
 
@@ -29,6 +31,10 @@ public class AirlineService {
 
     public Airline findByName(String name) {
         return airlineRepository.findByName(name);
+    }
+
+    public List<Airline> getAllAirlines() {
+        return airlineRepository.findAll();
     }
 
     public void save(Airline airline) {

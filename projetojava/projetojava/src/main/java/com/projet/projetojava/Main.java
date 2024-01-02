@@ -39,22 +39,7 @@ public class Main implements CommandLineRunner {
         Airline redLine = 	new Airline("Red");
         airlineRepository.save(redLine);
 
-        // similar for greenLine and blueLine
-
-        // Adicionando aviões à companhia aérea Red
-        addAirplanesToAirline(redLine, "Boeing 747", 366, 2);
-
-        // similar for other airlines
-
-        // Adicionando voos
-        addFlights(redLine, "Boeing 747", "Paris", "New York", "2023-10-02T14:30:00", "2023-10-02T18:00:00");
-
-        // similar for other flights
-
-        // Adicionando passageiros
-        addPassengers("John Doe", "123456789", "AB123456", "2023-10-02T14:30:00", LocalDate.of(1993, 6, 8));
-
-        // similar for other passengers
+      
     }
 
    private void addAirplanesToAirline(Airline airline, String model, int maxCapacity, int quantity) {
